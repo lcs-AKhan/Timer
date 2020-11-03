@@ -39,6 +39,7 @@ struct ContentView: View {
                                 Image("RestartButton2")
                                     .resizable()
                                     .frame(width: 50, height: 50)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             }
                             Button(action: {
                                 self.StartTimer()
@@ -47,6 +48,7 @@ struct ContentView: View {
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .background(Color.white)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             }
                         }
                     } else {
@@ -58,6 +60,7 @@ struct ContentView: View {
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .background(Color.white)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             }
                             Button(action: {
                                 RecordTime()
@@ -66,6 +69,7 @@ struct ContentView: View {
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .background(Color.black)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             }
                         }
                         Text("Recorded: \(recordedTime)")
