@@ -14,24 +14,27 @@ struct ContentView: View {
     
     @State var timerPaused: Bool = true
     @State var timer: Timer? = nil
+    @State var recordedTime = ""
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.black]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Section {
                     Text("TIMER")
                         .font(.largeTitle)
+                        .fontWeight(.medium)
                         .foregroundColor(.white)
-                    Text("\(hours):\(minutes):\(seconds)")
+                        .multilineTextAlignment(.center)
+                    Text(String(format: "%02d:%02d:%02d", hours, minutes, seconds))
                         .font(.largeTitle)
                         .foregroundColor(.white)
                         .padding(.vertical)
                     if timerPaused {
                         HStack {
                             Button(action: {
-                                print("RESTART")
+                                RestartTimer()
                             }) {
                                 Image("RestartButton2")
                                     .resizable()
@@ -43,10 +46,32 @@ struct ContentView: View {
                                 Image("PlayButton")
                                     .resizable()
                                     .frame(width: 50, height: 50)
+                                    .background(Color.white)
                             }
                         }
                     } else {
-                        print("")
+                        HStack {
+                            Button(action: {
+                                self.StopTimer()
+                            }) {
+                                Image("PauseButton")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .background(Color.white)
+                            }
+                            Button(action: {
+                                RecordTime()
+                            }) {
+                                Image("stopwatch")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .background(Color.black)
+                            }
+                        }
+                        Text("Recorded: \(recordedTime)")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding(.top)
                     }
                 }
             }
@@ -75,6 +100,15 @@ struct ContentView: View {
         timerPaused = true
         timer?.invalidate()
         timer = nil
+    }
+    func RestartTimer() {
+        timerPaused = true
+        hours = 0
+        minutes = 0
+        seconds = 0
+    }
+    func RecordTime() {
+        recordedTime = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
 
